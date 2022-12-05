@@ -1,0 +1,123 @@
+import time
+import urllib.parse
+import requests
+
+from urllib.parse import urlparse, parse_qs
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(ChromeDriverManager().install())
+driver = webdriver.Chrome(executable_path="D:\\Seleinum Project\\AVP Promoter\\chromedriver.exe")
+
+print(type(driver))
+driver.implicitly_wait(10)
+driver.maximize_window()
+driver.get("https://promoter.applination.in/")
+
+myPageTitle = driver.title
+
+# Login user id
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[4]/div[1]/input").send_keys("kaushiki@applination.in")
+# Password
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[4]/div[2]/input").send_keys("123456")
+# Login Button click
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[4]/div[3]").click()
+time.sleep(2)
+driver.execute_script("window.scrollBy(0,2000)","")
+
+eventURL="https://promoter.applination.in/RegEventEdit/8451"
+driver.get(eventURL)
+
+# initializing string
+test_str = eventURL
+
+url = 'https://promoter.applination.in/RegEventEdit/8451'
+var1 = url.split('/')[-2]
+print ( var1 )
+
+
+# printing original string
+print ( "The original string is : " + str ( test_str ) )
+
+# parse_qs gets the Dictionary and value list
+# res = urllib.parse.parse_qs ( test_str )
+
+# printing result
+# print ( "The parsed URL Params : " + str ( res ) )
+
+
+url = eventURL
+parse_result = urlparse(url)
+
+# 👇️ "page=10&limit=15&price=ASC"
+print(parse_result)
+
+dict_result = parse_qs(parse_result.query)
+
+# 👇️ {'page': ['10'], 'limit': ['15'], 'price': ['ASC']}
+print(dict_result)
+
+print(dict_result['page'][0])  # 👉️ '10'
+print(dict_result['price'][0])  # 👉️ 'ASC'
+ ######### 1 st Division Mens open 35+ ##########
+
+# Mens open 35+ -> Open after team 1-0 icon click next page -> details Mens 35_ open -> division  -> click
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[1]/div/span/img").click()
+time.sleep(1)
+
+#### Add Team
+# 1 Team 1 player + icon click
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[4]/div/div/img").click()
+time.sleep(1)
+# # 1Team 1 Player search option click
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[4]/div/div/span/div[1]/div[2]/input").click()
+time.sleep(1)
+# # 1Team 1 Player search "a" option -> send key
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[4]/div/div/span/div[1]/div[2]/input").send_keys("a")
+time.sleep(1)
+# # 1Team 1 Player search "a" option -> Richard Abiador, Bothell, WA -> click
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[4]/div/div/span/div[2]/div[2]").click()
+time.sleep(1)
+# # Donation
+# # Flood 40 click
+# driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div[3]/div[3]/label/input").click()
+# time.sleep(1)
+# # Flood 40 -> Next button click
+# driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/label/input").click()
+# time.sleep(1)
+# # Do you wish to generate the invoice for the team? -> No click
+driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/label/input").click()
+time.sleep(1)
+# # Do you wish to generate the invoice for the team? -> No -> Ok button  click
+driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div[3]/div/button[2]/span").click()
+time.sleep(1)
+
+#### 1st Team 2nd Player#########
+# 1 Team 2nd player + icon click
+
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[4]/div/div/img").click()
+time.sleep(1)
+# # 1Team 2nd Player search option click
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[4]/div/div/span/div[1]/div[2]/input").click()
+time.sleep(1)
+# # 1Team 2nd Player search "a" option -> send key
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[4]/div/div/span/div[1]/div[2]/input").send_keys("a")
+time.sleep(1)
+# 1Team 2nd Player search "a" option -> Alan Allred, Elon, NC-> click
+driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div/div[3]/div[1]/div/div/div/div[7]/div[1]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[4]/div/div/span/div[2]/div[2]").click()
+time.sleep(1)
+# # Donation
+# # Flood 40 click
+# driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div[3]/div[3]/label/input").click()
+# time.sleep(1)
+# # Flood 40 -> Next button click
+# driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/label/input").click()
+# time.sleep(1)
+# # Do you wish to generate the invoice for the team? -> No click
+driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div/div[3]/label/input").click()
+time.sleep(1)
+# # Do you wish to generate the invoice for the team? -> No -> Ok button  click
+driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div[3]/div/button[2]/span").click()
+time.sleep(200)
